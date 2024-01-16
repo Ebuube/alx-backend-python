@@ -6,6 +6,6 @@ import random
 
 async def wait_random(max_delay: int = 10) -> float:
     """"Wait for a random period"""
-    pause = random.randint(0, max_delay)
+    pause = (random.random() * 10) % max_delay
     asyncio.sleep(pause)
-    return pause
+    return float(pause)
