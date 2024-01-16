@@ -3,6 +3,7 @@
 import typing
 
 
+# This is a generic typing whose fait will be determined in the future
 T = typing.TypeVar('T')
 
 
