@@ -8,8 +8,10 @@ wait_random: typing.Callable = __import__('0-basic_async_syntax').wait_random
 
 
 async def wait_n(n: int, max_delay: int) -> typing.List[float]:
-    """Run these methods asynchronously"""
-    '''
+    """
+    Run these methods asynchronously
+
+    Example
     tasks = []
 
     for iterations in range(n):
@@ -17,7 +19,8 @@ async def wait_n(n: int, max_delay: int) -> typing.List[float]:
 
         wait_list = await asyncio.gather(*tasks)
         return sorted(wait_list)
-    '''
-    tasks: typing.List = [asyncio.create_task(wait_random(max_delay)) for i in range(n)]
+    """
+    tasks: typing.List = [asyncio.create_task(wait_random(max_delay)) \
+                          for i in range(n)]
     wait_list: typing.List = await asyncio.gather(*tasks)
     return sorted(wait_list)
