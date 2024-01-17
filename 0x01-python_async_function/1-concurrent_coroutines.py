@@ -4,7 +4,7 @@ import asyncio
 import typing
 
 
-wait_random = __import__('0-basic_async_syntax').wait_random
+wait_random: typing.Callable = __import__('0-basic_async_syntax').wait_random
 
 
 async def wait_n(n: int, max_delay: int) -> typing.List:
@@ -18,6 +18,6 @@ async def wait_n(n: int, max_delay: int) -> typing.List:
         wait_list = await asyncio.gather(*tasks)
         return sorted(wait_list)
     '''
-    tasks = [asyncio.create_task(wait_random(max_delay)) for i in range(n)]
-    wait_list = await asyncio.gather(*tasks)
+    tasks: typing.List = [asyncio.create_task(wait_random(max_delay)) for i in range(n)]
+    wait_list: typing.List = await asyncio.gather(*tasks)
     return sorted(wait_list)
