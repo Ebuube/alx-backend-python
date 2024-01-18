@@ -5,7 +5,7 @@ import typing
 import random
 
 
-async def async_generator() -> typing.AsyncGenerator[float, None]:
+async def async_generator() -> typing.Generator[float, None, None]:
     """
     Yield random numbers
     Yields float but returns None
