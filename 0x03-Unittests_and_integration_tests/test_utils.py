@@ -19,3 +19,13 @@ class TestAccessNestedMap(unittest.TestCase):
         """Ensure test satisfies the required conditions"""
         result = access_nested_map(nested_map, path)
         self.assertEqual(result, expected_result)
+
+    @parameterized.expand([
+        ({}, ['a'], None),
+        ({"a": 1}, ["a", "b"], None)
+    ])
+    def test_access_nested_map_exception(self, nested_map,
+                                         path, expected_result):
+        """Ensure expection is raised"""
+        with self.assertRaises(KeyError) as context:
+            result = access_nested_map(nested_map, path)
