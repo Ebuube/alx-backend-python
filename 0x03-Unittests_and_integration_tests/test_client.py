@@ -56,3 +56,42 @@ class TestGithubOrgClient(unittest.TestCase):
             result = cli._public_repos_url
 
             self.assertEqual(result, mock_org()['repos_url'])
+
+    @parameterized.expand([
+        ('google'),
+        ('abc')
+    ])
+    @patch('client.get_json')
+    def test_public_repos(self, org_name, mock_get_json):
+        """Ensure client can access repos
+        """
+        # Create a mock object for the response
+        mock_response = Mock()
+
+        # Set the json method of the mock response to return the payload
+        payload = {
+                'repos_url': f"https://api.github.com/orgs/{org_name}/repos",
+                'repos': [
+                    {'name': 'WebNex'},
+                    {'name': 'Envatim'},
+                    {'name': 'Migo'}
+                ]
+        }
+        mock_get_json.return_value = payload['repos']
+
+        # Set the return value
+        mock_get_json.return_value = mock_response
+
+        with patch('client.GithubOrgClient._public_repos_url',
+                   new_callable=PropertyMock) as mock_pru:
+            mock_pru.return_value = payload['repos_url']
+
+            # Test the public_repos method
+            cli = GithubOrgClient(org_name)
+            result = cli.public_repos()
+            print(result)
+
+            self.assertEqual(result, payload['repos'])
+
+            mock_pru.assert_called_once()
+        mock_get_json.assert_called_once()
