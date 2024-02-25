@@ -107,3 +107,23 @@ class TestGithubOrgClient(unittest.TestCase):
         org_name = 'google'
         cli = GithubOrgClient(org_name)
         self.assertEqual(cli.has_license(repo, license_key), expected_result)
+
+
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """Use integration tests to assert the GithubOrgClient class
+    """
+
+    def setUp(self):
+        """Set up
+        """
+        pass
+
+    def tearDown(self):
+        """Tear down
+        """
+        pass
+
+    def test_org(self):
+        """Test the org property
+        """
+        pass
